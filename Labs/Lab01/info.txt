@@ -1,0 +1,8 @@
+Launch Dosbox(in current dir)
+:> dosbox ./
+
+ls
+:> dir
+
+run
+:> NAME
