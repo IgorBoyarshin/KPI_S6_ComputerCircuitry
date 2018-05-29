@@ -1,0 +1,89 @@
+Launch Dosbox(in current dir)
+:> dosbox ./
+
+ls
+:> dir
+
+run
+:> NAME
+
+
+
+
+Good STuff
+;------------------------------------------------------------------------------
+; ; Wait for key press
+; mov ah, 07h
+; int 21h
+
+
+; print_ax:
+;     pusha
+;     ; Reset buff
+;     push ax
+;     xor bx, bx
+; print_ax_l1:
+;     mov al, 32
+;     mov [buff + bx], al
+;     inc bx
+;     cmp bx, 16
+;     jl print_ax_l1
+;     pop ax
+;
+;     xor bx, bx
+; print_ax_l2:
+;     mov ch, ah
+;     shr ch, 4
+;     cmp ch, 10
+;     jge print_ax_letter
+;     add ch, 48
+;     jmp print_ax_converted
+; print_ax_letter:
+;     add ch, 55 ; 65 - 10
+; print_ax_converted:
+;     mov [buff + bx], ch
+;
+;     shl ax, 4
+;     inc bx
+;     cmp bx, 4
+;     jl print_ax_l2
+;
+;     mov al, 104
+;     mov [buff + 4], al
+;
+;     mov ah, 9
+;     mov dx, buff
+;     int 21h
+;
+;     popa
+;     ret
+;
+
+
+;------------------------------------------------------------------------------
+    ; ; Set display mode
+    ; xor ah, ah
+    ; mov al, 3 ;80x25 color text mode
+    ; int 10h
+    ;
+    ; ; Clear screen
+    ; mov ah, 6
+    ; mov al, 0 ; whole window
+    ; mov cx, 0 ; (CH:CL) = (row:column) left upper corner
+    ; mov dx, 184Fh ; (DH:DL) = (row:column) right bottom corner
+    ; mov bh, 75h   ; attribute
+    ; int 10h
+    ;
+    ; ; Set cursor position
+    ; mov ah, 2
+    ; xor bh, bh ; page = 0
+    ; mov dx, 0C27h ; (row:column)
+    ; int 10h
+    ;
+    ; ; Put char with current attribute, don't advance cursor
+    ; mov ah, 0Ah
+    ; xor bh, bh ; page number = 0
+    ; mov al, 'A'
+    ; mov cx, 1 ; 1 times
+    ; int 10h
+;------------------------------------------------------------------------------
