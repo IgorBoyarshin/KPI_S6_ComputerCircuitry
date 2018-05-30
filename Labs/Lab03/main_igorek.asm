@@ -59,12 +59,12 @@ section .text
     xor ax, ax
     int 33h
 
-    ; Set cursor shape
-    mov ax, 9
-    mov bx, 8 ; Horz Hot Spot
-    mov cx, 8 ; Vert Hot Spot
-    mov dx, Cursor2 ; es:dx points to mask
-    int 33h
+    ; ; Set cursor shape
+    ; mov ax, 9
+    ; mov bx, 8 ; Horz Hot Spot
+    ; mov cx, 8 ; Vert Hot Spot
+    ; mov dx, Cursor2 ; es:dx points to mask
+    ; int 33h
 
     ; Show cursor
     mov ax, 1
