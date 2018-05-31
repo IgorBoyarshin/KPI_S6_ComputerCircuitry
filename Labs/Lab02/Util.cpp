@@ -35,6 +35,12 @@ char Util::getChar(const Number& number) {
     if ('0' <= c && c <= '9') {
         return c;
     }
+    if (number.id == 62+0) {
+        return ' ';
+    }
+    if (number.id == 62+1) {
+        return ',';
+    }
 
     return '*';
 }
@@ -47,6 +53,10 @@ Number Util::getNumber(char c) {
         return Number(26 + c - 'a');
     } else if ('0' <= c && c <= '9') {
         return Number(2 * 26 + c - '0');
+    } else if (' ' == c) {
+        return Number(62 + 0);
+    } else if (',' == c) {
+        return Number(62 + 1);
     }
 
     return Number::getZero();

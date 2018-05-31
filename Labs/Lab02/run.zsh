@@ -5,4 +5,4 @@ make
 ./main
 
 rm -f *.o
-rm -f main
+# rm -f main

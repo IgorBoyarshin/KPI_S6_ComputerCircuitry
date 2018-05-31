@@ -50,8 +50,12 @@ Polynom Sender::generateBasePolynom(unsigned int symbolsToFix) {
 Polynom Sender::div(Polynom pol1, const Polynom& pol2) {
     const unsigned int size2 = pol2.size() - 1;
     for (unsigned int size1 = pol1.size() - 1; size1 >= size2; size1--) {
+    // std::cout << "HERE" << std::endl;
         const unsigned int currX = size1 - size2;
         // pol2[size2] couldn't be zero beause it's the power of pol2
+        if (pol1[size1].isZero()) {
+            continue;
+        }
         const Number currNumber = pol1[size1] / pol2[size2];
 
         // By performing a single step of division we eliminate the highest term

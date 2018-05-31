@@ -7,12 +7,22 @@
 #include "constants.h"
 #include "Receiver.h"
 
-// #define IS_SENDER_NOT_RECEIVER
+// #define INPUT_KEYBOARD
 
 int main() {
     std::cout << "--------------------------------------------------" << std::endl;
 
-    const std::string secret("Love1My1Anka111");
+
+#ifdef INPUT_KEYBOARD
+    std::cout << "Input secret:";
+    std::string input;
+    std::cin >> input;
+    const std::string secret(input);
+#else
+    const std::string secret("love");
+    // const std::string secret("Love1My1Anka111");
+#endif
+
     std::cout << "Secret: "
         << secret
         << std::endl;
@@ -20,6 +30,9 @@ int main() {
     Polynom message = Sender::getMessageFromSecret(secret);
     {
         const Polynom generatingPolynom = Sender::generateBasePolynom(CORRECTING_MISTAKES);
+        // std::cout << generatingPolynom << std::endl;
+        // std::cout << message << std::endl;
+        // std::cout << Util::encode(secret) << std::endl;
         const Polynom controlSymbols = Sender::div(message, generatingPolynom);
         for (unsigned int i = 0; i < CONTROL_SYMBOLS; i++) {
             message[i] = controlSymbols[i];
@@ -46,32 +59,52 @@ int main() {
 
     // Distort
     // <place, bit>. 2 distortions tops
-    const std::vector<Distortion> distortions = {{5, 0}, {6, 2}};
-    std::cout << "Applying distortions: ";
-    for (const auto& distortion : distortions) {
-        std::cout
-            << "at "
-            << Number(distortion.first)
-            << ": "
-            << Number(distortion.second)
-            << ", ";
-    }
-    std::cout << std::endl;
+    // const std::vector<Distortion> distortions = {{5, 0}, {6, 2}};
 
-    const Polynom distortedMessage = Sender::distort(message, distortions);
-    std::cout << "Distorted message: "
-        << distortedMessage
-        << " === "
-        << Util::decode(distortedMessage)
-        << std::endl;
+//     std::vector<Distortion> distortions;
+// #ifdef INPUT_KEYBOARD
+//     std::cout << "Input distortions(place bit place bit). (-1 if not present):";
+//     int place1, place2, bits1, bits2;
+//     std::cin >> place1 >> bits1 >> place2 >> bits2;
+//     if (place1 != -1 && bits1 != -1)
+//         distortions.push_back({place1, bits1});
+//     if (place2 != -1 && bits2 != -1)
+//         distortions.push_back({place2, bits2});
+// #else
+//     distortions.push_back({3, 0});
+//     distortions.push_back({3, 1});
+//     distortions.push_back({3, 2});
+//     distortions.push_back({6, 2});
+//     distortions.push_back({6, 4});
+//     distortions.push_back({6, 5});
+// #endif
 
-    std::cout << "Sending:  "
-        << Util::decode(distortedMessage)
-        << std::endl;
+    // std::cout << "Applying distortions: ";
+    // for (const auto& distortion : distortions) {
+    //     std::cout
+    //         << "at "
+    //         << Number(distortion.first)
+    //         << ": "
+    //         << Number(distortion.second)
+    //         << ", ";
+    // }
+    // std::cout << std::endl;
+    //
+    // const Polynom distortedMessage = Sender::distort(message, distortions);
+    // std::cout << "Distorted message: "
+    //     << distortedMessage
+    //     << " === "
+    //     << Util::decode(distortedMessage)
+    //     << std::endl;
+
+    // std::cout << "Sending:  "
+        // << Util::decode(distortedMessage)
+        // << std::endl;
 
     std::cout << "--------------------------------------------------" << std::endl;
 
-    const std::string received = Util::decode(distortedMessage);
+    // const std::string distortedMessage = "l83e";
+    const std::string received = ",t5tlove";//Util::decode(distortedMessage);
     std::cout << "Received: "
         << received
         << std::endl;
