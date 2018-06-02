@@ -73,9 +73,13 @@ std::pair<Number, Number> Receiver::getBetas(const std::pair<Number, Number>& si
         }
     }
 
-    std::cout << "FAILED" << std::endl;
-    return {sigmas.first, sigmas.second};
+    std::cout
+        << "FAILED TO DERIVE BETAS. PROBABLY AN INVALID MESSAGE WAS RECEIVED. Terminating."
+        << std::endl;
+    exit(-1);
 
+    // The following piece of code could work as well, but it needs to be fixed first
+    //
     // std::pair<Number, Number> betas;
     // bool found1 = false;
     // bool found2 = false;

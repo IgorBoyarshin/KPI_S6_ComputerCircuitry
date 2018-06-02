@@ -7,8 +7,8 @@
 #include "Util.h"
 
 
-// <symbol, bit> (from lowest)
-typedef std::pair<unsigned int, unsigned int> Distortion;
+// <index, new Number> (from lowest)
+typedef std::pair<unsigned int, Number> Distortion;
 
 
 class Sender {

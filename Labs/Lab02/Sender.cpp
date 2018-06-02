@@ -50,7 +50,6 @@ Polynom Sender::generateBasePolynom(unsigned int symbolsToFix) {
 Polynom Sender::div(Polynom pol1, const Polynom& pol2) {
     const unsigned int size2 = pol2.size() - 1;
     for (unsigned int size1 = pol1.size() - 1; size1 >= size2; size1--) {
-    // std::cout << "HERE" << std::endl;
         const unsigned int currX = size1 - size2;
         // pol2[size2] couldn't be zero beause it's the power of pol2
         if (pol1[size1].isZero()) {
@@ -63,10 +62,6 @@ Polynom Sender::div(Polynom pol1, const Polynom& pol2) {
 
         // Iterate over all terms(Xs) in pol2 except for the highest(already taken care of)
         for (int i = size2 - 1; i >= 0; i--) {
-            // const Number& pol2Number = pol2[i];
-            // if (pol2Number.isZero()) {
-            //     continue;
-            // }
             // if pol2[i] is zero => result of mul is zero => pol1[..} won't change
             pol1[currX + i] = pol1[currX + i] + (currNumber * pol2[i]);
         }
@@ -78,8 +73,7 @@ Polynom Sender::div(Polynom pol1, const Polynom& pol2) {
 
 Polynom Sender::distort(Polynom polynom, const std::vector<Distortion>& distortions) {
     for (const Distortion& distortion : distortions) {
-        polynom[distortion.first] = polynom[distortion.first] +
-            Number(Number::getIdByCode(1 << distortion.second));
+        polynom[distortion.first] = distortion.second;
     }
 
     return polynom;
